@@ -22,7 +22,8 @@
     "start:db": "mongod --dbpath ./mongo_data",
     "start:server": "cd ./server && yarn start",
     "postinstall": "yarn run install:client && yarn run install:server && yarn run install:mongo",
-    "test:server": "cd ./server && yarn test"
+    "test:server": "cd ./server && yarn test",
+    "update": "git checkout master && git pull upstream master"
   },
   "author": "",
   "license": "ISC",
