@@ -1,6 +1,5 @@
 import React from 'react'
 import {domainData} from '../../lib/propTypes'
-import { Route, Switch } from 'react-router-dom'
 
 const propTypes = {
   domainData
