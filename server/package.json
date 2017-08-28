@@ -1,0 +1,23 @@
+{
+  "name": "E-Commerce-React-server",
+  "version": "1.0.0",
+  "license": "ISC",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./start.js",
+    "test": "node ./test.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.8"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.5.0"
+  },
+  "directories": {
+    "test": "test"
+  }
+}

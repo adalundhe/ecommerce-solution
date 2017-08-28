@@ -1,0 +1,39 @@
+{
+  "name": "E-Commerce-React-root",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "yarn run clean:root && yarn run clean:client && yarn run clean:server",
+    "clean:client": "rimraf ./client/node_modules && rimraf ./server/node_modules",
+    "clean:root": "rimraf ./node_modules",
+    "clean:server": "rimraf ./client/node_modules && rimraf ./server/node_modules",
+    "install:client": "cd ./client && echo 'Installing client packages...' && yarn install",
+    "install:server": "cd ./server && echo 'Installing server packages...' && yarn install",
+    "latest": "yarn run latest:root && yarn run latest:client && yarn run latest:server",
+    "latest:client": "cd ./client && echo 'Upgrading client packages to latest...' && yarn --latest upgrade",
+    "latest:root": "echo 'Upgrading root packages to latest...' && yarn --latest upgrade",
+    "latest:server": "cd ./server && echo 'Upgrading server packages to latest...' && yarn --latest upgrade",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "start:client": "cd ./client && yarn start",
+    "start:db": "mongod --dbpath ./mongo_data",
+    "start:server": "cd ./server && yarn start",
+    "postinstall": "yarn run install:client && yarn run install:server && mkdir -p ./mongo_data",
+    "test:server": "cd ./server && yarn test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "rimraf": "^2.6.1"
+  }
+}
