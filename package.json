@@ -25,7 +25,7 @@
     "test:server": "cd ./server && yarn test",
     "update": "git checkout master && git pull upstream master"
   },
-  "author": "",
+  "author": "Jay Cheroske",
   "license": "ISC",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
