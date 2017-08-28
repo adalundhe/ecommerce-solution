@@ -8,12 +8,12 @@ const ReviewSchema = new mongoose.Schema({
   modified: {type: Date, required: true}
 })
 
-ReviewSchema.methods.loadData = function(data){
+ReviewSchema.methods.loadData = function (data) {
   this.rating = data.rating || this.rating
   this.comment = data.comment || this.comment
 }
 
-ReviewSchema.methods.setMetaDates = function(){
+ReviewSchema.methods.setMetaDates = function () {
   const newDate = new Date()
   this.created = this.created || newDate
   this.modified = newDate

@@ -4,23 +4,29 @@ const Order = require('../models/Order')
 
 Router.route('/')
   .get((req, res) => {
-    Order.find((err, orders) => {
-      if (err) {
-        res.json({ message: err, data: null })
-      } else {
-        res.json({ message: 'Got all orders', data: orders })
-      }
-    })
+    Order.find()
+      .populate('products')
+      .exec((err, orders) => {
+        if (err) {
+          res.json({ message: err, data: null })
+        } else {
+          res.json({ message: 'Got all orders', data: orders })
+        }
+      })
   })
   .post((req, res) => {
     const order = new Order()
     order.setStatus(req.body)
     order.save((err, order) => {
-      if (err) {
-        res.json({ message: err, data: null })
-      } else {
-        res.json({ message: `Created new order.`, data: order })
-      }
+      Order.findById(order._id)
+        .populate('products')
+        .exec((err, order) => {
+          if (err) {
+            res.json({ message: err, data: null })
+          } else {
+            res.json({ message: `Created new order.`, data: order })
+          }
+        })
     })
   })
 

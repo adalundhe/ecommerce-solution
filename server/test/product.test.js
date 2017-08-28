@@ -51,7 +51,7 @@ describe('Products', () => {
         name: 'Netgear Nighthawk x10',
         price: 449.95,
         category: 'Electronics',
-        image: 'n/a',
+        image: 'n/a'
       })
       chai
         .request(server)
@@ -133,7 +133,7 @@ describe('Products', () => {
         modified: created
       })
       product.save((err, product) => {
-        console.log("ERR",err)
+        console.log('ERR', err)
         chai.request(server)
           .put(`/api/products/${product._id}`)
           .send({ name: 'Daffodill Dandy' })
