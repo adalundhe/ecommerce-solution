@@ -1,11 +1,9 @@
-import PropTypes from 'prop-types'
 import React from 'react'
+import {domainData} from '../../lib/propTypes'
 import { Route, Switch } from 'react-router-dom'
 
 const propTypes = {
-  domainData: PropTypes.shape({
-    products: PropTypes.array.isRequired
-  }).isRequired
+  domainData
 }
 
 const Layout = (props) => (
