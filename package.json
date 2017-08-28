@@ -10,6 +10,8 @@
     "clean:server": "rimraf ./client/node_modules && rimraf ./server/node_modules",
     "install:client": "cd ./client && echo 'Installing client packages...' && yarn install",
     "install:server": "cd ./server && echo 'Installing server packages...' && yarn install",
+    "install:mongo": "mkdir -p ./mongo_data",
+    "install:upstream": "git remote add upstream https://github.com/AmericaCampaign/Projects-React-E-Commerce-1.git",
     "latest": "yarn run latest:root && yarn run latest:client && yarn run latest:server",
     "latest:client": "cd ./client && echo 'Upgrading client packages to latest...' && yarn --latest upgrade",
     "latest:root": "echo 'Upgrading root packages to latest...' && yarn --latest upgrade",
@@ -19,7 +21,7 @@
     "start:client": "cd ./client && yarn start",
     "start:db": "mongod --dbpath ./mongo_data",
     "start:server": "cd ./server && yarn start",
-    "postinstall": "yarn run install:client && yarn run install:server && mkdir -p ./mongo_data",
+    "postinstall": "yarn run install:client && yarn run install:server && yarn run install:mongo && yarn run install:upstream",
     "test:server": "cd ./server && yarn test"
   },
   "author": "",
