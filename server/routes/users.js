@@ -17,14 +17,28 @@ Router.route('/')
     })
   })
 
-Router.route('/:user_id')
+Router.route('/:userId/orders')
   .get((req, res) => {
-    User.findById(req.params.user_id, (err, user) => {
+    User.findById(req.params.userId)
+      .populate('orders')
+      .exec((err, user) => {
+        if (err) {
+          res.status(500)
+        } else {
+          res.status(200)
+          res.json(user.orders)
+        }
+      })
+  })
+
+Router.route('/:userId')
+  .get((req, res) => {
+    User.findById(req.params.userId, (err, user) => {
       if (err) { res.json({ message: err, data: null }) } else { res.json({ message: `Found user: ${user.name}`, data: user }) }
     })
   })
   .put((req, res) => {
-    User.findById(req.params.user_id, (err, user) => {
+    User.findById(req.params.userId, (err, user) => {
       user.loadData(req.body)
       user.setMetaDates()
       user.save((err, user) => {
@@ -33,7 +47,7 @@ Router.route('/:user_id')
     })
   })
   .delete((req, res) => {
-    User.findById({_id: req.params.user_id}, (err) => {
+    User.findById({_id: req.params.userId}, (err) => {
       if (err) { res.json({ message: err, data: null }) } else { res.json({ message: `Successfully deleted project.`, data: {} }) }
     })
   })

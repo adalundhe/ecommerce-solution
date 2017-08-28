@@ -59,7 +59,7 @@ describe('Reviews', () => {
     it('it should POST a review with all fields', (done) => {
       const review = new Review({
         rating: 4,
-        comment: 'This works!',
+        comment: 'This works!'
       })
 
       chai.request(server)

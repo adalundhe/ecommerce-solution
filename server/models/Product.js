@@ -10,14 +10,14 @@ const ProductSchema = new mongoose.Schema({
   reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
 })
 
-ProductSchema.methods.loadData = function(data){
+ProductSchema.methods.loadData = function (data) {
   this.name = data.name || this.name
   this.price = data.price || this.price
   this.category = data.category || this.category
   this.image = data.image || this.image
 }
 
-ProductSchema.methods.setMetaDates = function(){
+ProductSchema.methods.setMetaDates = function () {
   const newDate = new Date()
   this.created = this.created || newDate
   this.modified = newDate
