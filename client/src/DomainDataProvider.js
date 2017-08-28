@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import Layout from './Layout'
-import {getAllProducts} from './serverApi'
+import Layout from './components/structure/Layout'
+import * as ServerApi from './lib/serverApi'
 
 class DomainDataProvider extends Component {
   state = {
@@ -9,15 +9,27 @@ class DomainDataProvider extends Component {
   }
 
   componentDidMount () {
-    getAllProducts(products =>
+    this.getAllProducts()
+  }
+
+  getAllProducts = () =>
+    ServerApi.getAllProducts(products =>
       this.setState({
         isLoaded: true,
         products
       }))
-  }
+
+  addProduct = (newProduct) =>
+    ServerApi.addProduct(newProduct, this.getAllProducts)
+
+  deleteProduct = (productId) =>
+    ServerApi.deleteProduct(productId, this.getAllProducts)
 
   render () {
     const domainData = {
+      addProduct: this.addProduct,
+      deleteProduct: this.deleteProduct,
+      isLoaded: this.state.isLoaded,
       products: this.state.products
     }
 
