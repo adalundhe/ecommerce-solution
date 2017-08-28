@@ -21,7 +21,7 @@
     "start:client": "cd ./client && yarn start",
     "start:db": "mongod --dbpath ./mongo_data",
     "start:server": "cd ./server && yarn start",
-    "postinstall": "yarn run install:client && yarn run install:server && yarn run install:mongo && yarn run install:upstream",
+    "postinstall": "yarn run install:client && yarn run install:server && yarn run install:mongo",
     "test:server": "cd ./server && yarn test"
   },
   "author": "",

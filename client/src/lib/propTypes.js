@@ -9,8 +9,6 @@ export const product = PropTypes.shape({
 })
 
 export const domainData = PropTypes.shape({
-  addProduct: PropTypes.func.isRequired,
-  deleteProduct: PropTypes.func.isRequired,
   isLoaded: PropTypes.bool.isRequired,
   products: PropTypes.arrayOf(product).isRequired
 }).isRequired
