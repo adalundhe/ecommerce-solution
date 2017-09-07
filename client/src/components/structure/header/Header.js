@@ -22,6 +22,8 @@ const Header = (props) =>
       <NavItem to='/'>Home</NavItem>
       <NavItem to='/about'>About</NavItem>
       <NavItem to='/products'>Products</NavItem>
+      <NavItem to='/signup'> Register </NavItem>
+      <NavItem to='/login'> Login </NavItem>
     </nav>
   </header>
 
