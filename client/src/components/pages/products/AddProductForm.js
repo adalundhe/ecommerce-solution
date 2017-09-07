@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const propTypes = {
   name: PropTypes.string.isRequired,
@@ -29,6 +30,8 @@ const AddProductForm = (props) =>
         disabled={!props.name || !props.category || !props.image || props.price <= 0}
       />
     </form>
+
+    <Link to='/products'>Cancel</Link>
   </div>
 
 AddProductForm.propTypes = propTypes

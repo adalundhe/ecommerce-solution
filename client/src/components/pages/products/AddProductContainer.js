@@ -3,12 +3,12 @@ import React, {Component} from 'react'
 import * as AppPropTypes from '../../../lib/propTypes'
 import AddProductForm from './AddProductForm'
 
-const propTypes = {
-  domainData: AppPropTypes.domainData,
-  history: PropTypes.object.isRequired
-}
-
 class AddProductContainer extends Component {
+  static propTypes = {
+    domainData: AppPropTypes.domainData,
+    history: PropTypes.object.isRequired
+  }
+
   state = {
     name: '',
     category: '',
@@ -55,7 +55,5 @@ class AddProductContainer extends Component {
     />
   }
 }
-
-AddProductContainer.propTypes = propTypes
 
 export default AddProductContainer
