@@ -13,7 +13,7 @@ class AddProductContainer extends Component {
     name: '',
     category: '',
     image: '',
-    price: 0
+    price: '0'
   }
 
   onNameChanged = (event) => this.setState({

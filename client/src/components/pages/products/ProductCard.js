@@ -11,6 +11,7 @@ const propTypes = {
 const ProductCard = (props) =>
   <div>
     <h1>{props.product.name}</h1>
+    <h2>{props.product.category}</h2>
     <h3>{props.product.price}</h3>
     <button onClick={props.onEdit}>Edit</button>
     <button onClick={props.onDelete}>Delete</button>

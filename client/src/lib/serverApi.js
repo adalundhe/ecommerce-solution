@@ -33,3 +33,23 @@ export const deleteProduct = (productId, callback) => {
     .then(response => response.json())
     .then(json => callback(json.data))
 }
+
+export const updateProduct = (product, callback) => {
+  const headers = new Headers({
+    'Content-Type': 'application/json'
+  })
+
+  const options = {
+    headers: headers,
+    method: 'PUT',
+    body: JSON.stringify(product)
+  }
+
+  fetch(`/api/products/${product._id}`, options)
+    .then(response => response.json())
+    .then(json => {
+      console.log(json)
+      return json
+    })
+    .then(json => callback(json.data))
+}

@@ -23,7 +23,13 @@ const Products = (props) =>
     />
     <Route
       path='/products/edit/:productId'
-      render={(routeProps) => <EditProductContainer domainData={props.domainData} history={routeProps.history} />}
+      render={(routeProps) =>
+        <EditProductContainer
+          domainData={props.domainData}
+          history={routeProps.history}
+          match={routeProps.match}
+        />
+      }
     />
   </div>
 

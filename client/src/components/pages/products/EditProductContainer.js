@@ -6,16 +6,22 @@ import EditProductForm from './EditProductForm'
 class EditProductContainer extends Component {
   static propTypes = {
     domainData: AppPropTypes.domainData,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired
   }
 
-  constructor () {
+  constructor (props) {
     super()
-    this.state = {
-      name: 'foo',
-      category: 'bar',
-      image: 'blah',
-      price: '123'
+    console.log(props.match)
+    const productId = props.match.params.productId // get id from url
+    const product = props.domainData.findProductById(productId) // get product object from domain data
+
+    this.state = { // copy product into state
+      _id: product._id,
+      name: product.name,
+      category: product.category,
+      image: product.image,
+      price: product.price
     }
   }
 
@@ -29,7 +35,8 @@ class EditProductContainer extends Component {
 
   onSubmit = (event) => {
     event.preventDefault()
-    console.log('form submitted')
+    this.props.domainData.updateProduct(this.state)
+    this.props.history.push('/products')
   }
 
   render () {
