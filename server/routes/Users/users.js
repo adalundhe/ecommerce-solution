@@ -12,19 +12,6 @@ exports.getAll = (req, res) => {
     })
 }
 
-exports.createOne = (req, res) => {
-  const user = new User()
-  user.loadData(req.body)
-  user.setMetaDates()
-  user.save((err, user) => {
-    if (err) {
-      res.json({ message: err, data: null })
-    } else {
-      res.json({ message: `User: ${user.name} successfully created`, data: user })
-    }
-  })
-}
-
 exports.getOne = (req, res) => {
   User.findById(req.params.user_id, (err, user) => {
     if (err) {

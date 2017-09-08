@@ -4,6 +4,8 @@ import * as AppPropTypes from '../../lib/propTypes'
 import Home from '../pages/Home'
 import About from '../pages/About'
 import Products from '../pages/products/Products'
+import Signup from '../pages/authentication/SignupContainer'
+import Login from '../pages/authentication/LoginContainer'
 
 const propTypes = {
   domainData: AppPropTypes.domainData
@@ -28,6 +30,8 @@ const Main = (props) =>
     <Route path='/' exact component={Home} />
     <Route path='/about' component={About} />
     <Route path='/products' render={() => <Products domainData={props.domainData} />} />
+    <Route path='/login' component={Login} />
+    <Route path='/signup' component={Signup} />
   </main>
 
 Main.propTypes = propTypes

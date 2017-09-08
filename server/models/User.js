@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt-nodejs')
 
 const UserSchema = new mongoose.Schema({
-  name: {type: String, required: true},
-  password: {type: String, required: true},
-  address: {type: Object, required: true},
-  created: {type: Date, required: true},
-  modified: {type: Date, required: true},
+  local: {
+  	firstName: String,
+  	lastName: String,
+    email: String,
+    password: String
+  },
   cart: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
   orders: [{type: mongoose.Schema.Types.ObjectId, ref: 'Order'}],
   reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
@@ -21,6 +23,15 @@ UserSchema.methods.setMetaDates = function () {
   const newDate = new Date()
   this.created = this.created || newDate
   this.modified = newDate
+}
+
+UserSchema.methods.generateHash = function(password){
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
+
+// this compares database password to the one the user entered
+UserSchema.methods.validPassword = function(password){
+  return bcrypt.compareSync(password, this.local.password);
 }
 
 module.exports = mongoose.model('User', UserSchema)
