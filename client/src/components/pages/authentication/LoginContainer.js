@@ -3,20 +3,19 @@ import $ from 'jquery'
 import LoginForm from './LoginForm'
 
 class LoginContainer extends Component {
-
   state = {
     email: undefined,
     password: undefined
   }
 
   updateField = (field, value) => {
-    const newState = {};
-    newState[field] = value;
-    this.setState(newState);
+    const newState = {}
+    newState[field] = value
+    this.setState(newState)
   }
 
   handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     const local = {
       email: this.state.email,
@@ -28,13 +27,13 @@ class LoginContainer extends Component {
       data: local
 
     }).done((response) => {
-    						 (response.user._id) ?
-    					   window.location='/products' :
-                 window.locatin='/login'
-               })
+    						 (response.user._id)
+    					   ? window.location = '/products'
+        : window.locatin = '/login'
+    })
   }
-  render(){
-    return(
+  render () {
+    return (
       <LoginForm
         updateField={this.updateField}
         handleSubmit={this.handleSubmit}
@@ -42,4 +41,4 @@ class LoginContainer extends Component {
     )
   }
 }
-export default LoginContainer;
+export default LoginContainer

@@ -5,11 +5,13 @@ import * as ServerApi from './lib/serverApi'
 class DomainDataProvider extends Component {
   state = {
     isLoaded: false,
-    products: []
+    products: [],
+    user: null
   }
 
   componentDidMount () {
     this.getAllProducts()
+    this.get
   }
 
   getAllProducts = () =>

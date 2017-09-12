@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt-nodejs')
 
 const UserSchema = new mongoose.Schema({
   local: {
-  	firstName: String,
-  	lastName: String,
+    firstName: String,
+    lastName: String,
     email: String,
     password: String
   },
@@ -25,13 +25,12 @@ UserSchema.methods.setMetaDates = function () {
   this.modified = newDate
 }
 
-UserSchema.methods.generateHash = function(password){
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+UserSchema.methods.validPassword = function (password) {
+  return bcrypt.compareSync(password, this.local.password)
 }
 
-// this compares database password to the one the user entered
-UserSchema.methods.validPassword = function(password){
-  return bcrypt.compareSync(password, this.local.password);
+UserSchema.statics.generateHash = function (password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 }
 
 module.exports = mongoose.model('User', UserSchema)

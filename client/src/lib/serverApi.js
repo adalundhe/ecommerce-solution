@@ -53,3 +53,23 @@ export const updateProduct = (product, callback) => {
     })
     .then(json => callback(json.data))
 }
+
+export const signupUser = (user) => {
+  const headers = new Headers({
+    'Content-Type': 'application/json'
+  })
+
+  const options = {
+    headers: headers,
+    method: 'POST',
+    body: JSON.stringify(user)
+  }
+
+  return fetch('/api/signup', options)
+    .then(response => response.json())
+    .catch(err => console.log(err))
+}
+
+export const loginUser = (email, password) => {
+
+}

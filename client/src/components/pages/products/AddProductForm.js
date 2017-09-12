@@ -11,7 +11,7 @@ const propTypes = {
   onImageChanged: PropTypes.func.isRequired,
   price: PropTypes.number.isRequired,
   onPriceChanged: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired
 }
 
 const AddProductForm = (props) =>
