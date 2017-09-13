@@ -11,24 +11,28 @@ class DomainDataProvider extends Component {
 
   componentDidMount () {
     this.getAllProducts()
-    this.get
+//    this.get
   }
 
   getAllProducts = () =>
-    ServerApi.getAllProducts(products =>
-      this.setState({
-        isLoaded: true,
-        products: products
-      }))
+    ServerApi.getAllProducts()
+      .then(products =>
+        this.setState({
+          isLoaded: true,
+          products: products
+        }))
 
   addProduct = (newProduct) =>
-    ServerApi.addProduct(newProduct, this.getAllProducts)
+    ServerApi.addProduct(newProduct)
+      .then(this.getAllProducts)
 
   deleteProduct = (productId) =>
-    ServerApi.deleteProduct(productId, this.getAllProducts)
+    ServerApi.deleteProduct(productId)
+      .then(this.getAllProducts)
 
   updateProduct = (product) =>
-    ServerApi.updateProduct(product, this.getAllProducts)
+    ServerApi.updateProduct(product)
+      .then(this.getAllProducts)
 
   findProductById = (productId) => this.state.products.find(p => p._id === productId)
 
