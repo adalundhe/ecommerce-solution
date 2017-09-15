@@ -1,44 +1,44 @@
+import PropTypes from 'prop-types'
 import React, {Component} from 'react'
-import $ from 'jquery'
+import {withRouter} from 'react-router-dom'
+import * as AppPropTypes from '../../../lib/propTypes'
 import LoginForm from './LoginForm'
 
 class LoginContainer extends Component {
+  static propTypes = {
+    domainData: AppPropTypes.domainData,
+    history: PropTypes.object.isRequired
+  }
+
   state = {
-    email: undefined,
-    password: undefined
+    email: null,
+    password: null
   }
 
-  updateField = (field, value) => {
-    const newState = {}
-    newState[field] = value
-    this.setState(newState)
-  }
+  callbacks = {
+    onEmailChanged: event => this.setState({
+      email: event.target.value
+    }),
 
-  handleSubmit = (event) => {
-    event.preventDefault()
+    onPasswordChanged: event => this.setState({
+      password: event.target.value
+    }),
 
-    const local = {
-      email: this.state.email,
-      password: this.state.password
+    onSubmit: event => {
+      event.preventDefault()
+      this.props.domainData.loginUser(...this.state)
+        .then(() => this.props.history.push('/'))
     }
-    $.ajax({
-      url: '/api/login',
-      method: 'POST',
-      data: local
-
-    }).done((response) => {
-    						 (response.user._id)
-    					   ? window.location = '/products'
-        : window.locatin = '/login'
-    })
   }
+
   render () {
     return (
       <LoginForm
-        updateField={this.updateField}
-        handleSubmit={this.handleSubmit}
+        {...this.state}
+        {...this.callbacks}
       />
     )
   }
 }
-export default LoginContainer
+
+export default withRouter(LoginContainer)

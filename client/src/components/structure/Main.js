@@ -30,8 +30,8 @@ const Main = (props) =>
     <Route path='/' exact component={Home} />
     <Route path='/about' component={About} />
     <Route path='/products' render={() => <Products domainData={props.domainData} />} />
-    <Route path='/login' component={Login} />
-    <Route path='/signup' component={Signup} />
+    <Route path='/login' render={() => <Login domainData={props.domainData} />} />
+    <Route path='/signup' render={() => <Signup domainData={props.domainData} />} />
   </main>
 
 Main.propTypes = propTypes

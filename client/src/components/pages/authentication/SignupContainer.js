@@ -1,47 +1,49 @@
+import PropTypes from 'prop-types'
 import React, {Component} from 'react'
-import $ from 'jquery'
+import {withRouter} from 'react-router-dom'
+import * as AppPropTypes from '../../../lib/propTypes'
 import SignupForm from './SignupForm'
 
 class SignUpContainer extends Component {
+  static propTypes = {
+    domainData: AppPropTypes.domainData,
+    history: PropTypes.object.isRequired
+  }
+
   state = {
-    firstName: undefined,
-    lastName: undefined,
-    email: undefined,
-    password: undefined
+    firstName: null,
+    lastName: null,
+    email: null,
+    password: null
   }
 
-  updateField = (field, value) => {
-    const newState = {}
-    newState[field] = value
-    this.setState(newState)
+  callbacks = {
+    onFirstNameChanged: event => this.setState({firstName: event.target.value}),
+
+    onLastNameChanged: event => this.setState({lastName: event.target.value}),
+
+    onEmailChanged: event => this.setState({email: event.target.value}),
+
+    onPasswordChanged: event => this.setState({password: event.target.value}),
+
+    onSubmit: event => {
+      event.preventDefault()
+      this.props.domainData.signupUser(this.state)
+        .then(() => this.props.history.push('/'))
+        .catch(err => console.log(err))
+    }
   }
 
-	  handleSubmit = (event) => {
-	    event.preventDefault()
-
-     const local = {email: this.state.email,
-       password: this.state.password,
-       firstName: this.state.firstName,
-       lastName: this.state.lastName}
-
-     $.ajax({
-	      url: '/api/signup',
-	      method: 'POST',
-	      data: local
-	    }).done((response) => (
-	      console.log('SUCCESS AT SIGN UP')) ||
-	      (response._id) // users have to go back to the login page
-	      ? window.location = '/login'
-	      : window.location = `/err/${response.message}`)
-	  }
-
-   render () {
-     return (
-       <div>
-         <SignupForm updateField={this.updateField} handleSubmit={this.handleSubmit} />
-       </div>
-     )
-   }
+  render () {
+    return (
+      <div>
+        <SignupForm
+          {...this.state}
+          {...this.callbacks}
+        />
+      </div>
+    )
+  }
 }
 
-export default SignUpContainer
+export default withRouter(SignUpContainer)

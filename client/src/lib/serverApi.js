@@ -10,8 +10,18 @@ const ajaxRequest = (uri, method, body) => {
   }
 
   return fetch(`/api/${uri}`, options)
+    .then(handleErrors)
     .then(response => response.json())
     .then(json => json.data)
+}
+
+const handleErrors = response => {
+  if (!response.ok) {
+    const err = Error(response.statusText)
+    err.statusCode = response.status
+    throw err
+  }
+  return response
 }
 
 export const getAllProducts = () => ajaxRequest('products', 'GET')
@@ -22,22 +32,8 @@ export const deleteProduct = (productId) => ajaxRequest(`products/${productId}`,
 
 export const updateProduct = (product) => ajaxRequest(`products/${product._id}`, 'PUT', product)
 
-export const signupUser = (user) => {
-  const headers = new Headers({
-    'Content-Type': 'application/json'
-  })
+export const signupUser = (user) => ajaxRequest('signup', 'POST', user)
 
-  const options = {
-    headers: headers,
-    method: 'POST',
-    body: JSON.stringify(user)
-  }
+export const loginUser = (email, password) => ajaxRequest('login', 'POST', {email, password})
 
-  return fetch('/api/signup', options)
-    .then(response => response.json())
-    .catch(err => console.log(err))
-}
-
-export const loginUser = (email, password) => {
-
-}
+export const getUser = () => ajaxRequest('get_user', 'GET')

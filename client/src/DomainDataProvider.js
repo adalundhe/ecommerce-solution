@@ -9,41 +9,61 @@ class DomainDataProvider extends Component {
     user: null
   }
 
-  componentDidMount () {
-    this.getAllProducts()
-//    this.get
+  methods = {
+    getAllProducts: () =>
+      ServerApi.getAllProducts()
+        .then(products =>
+          this.setState({
+            isLoaded: true,
+            products: products
+          })),
+
+    addProduct: (newProduct) =>
+      ServerApi.addProduct(newProduct)
+        .then(this.methods.getAllProducts),
+
+    deleteProduct: (productId) =>
+      ServerApi.deleteProduct(productId)
+        .then(this.methods.getAllProducts),
+
+    updateProduct: (product) =>
+      ServerApi.updateProduct(product)
+        .then(this.methods.getAllProducts),
+
+    findProductById: (productId) => this.state.products.find(p => p._id === productId),
+
+    signupUser: (user) =>
+      ServerApi.signupUser(user)
+        .then(user => {
+          this.setState({user})
+          return user
+        }),
+
+    loginUser: (email, password) =>
+      ServerApi.loginUser(email, password)
+        .then(user => {
+          this.setState({user})
+          return user
+        }),
+
+    getUser: () =>
+      ServerApi.getUser()
+        .then(user => {
+          console.log('user on load', user)
+          this.setState({user})
+          return user
+        })
   }
 
-  getAllProducts = () =>
-    ServerApi.getAllProducts()
-      .then(products =>
-        this.setState({
-          isLoaded: true,
-          products: products
-        }))
-
-  addProduct = (newProduct) =>
-    ServerApi.addProduct(newProduct)
-      .then(this.getAllProducts)
-
-  deleteProduct = (productId) =>
-    ServerApi.deleteProduct(productId)
-      .then(this.getAllProducts)
-
-  updateProduct = (product) =>
-    ServerApi.updateProduct(product)
-      .then(this.getAllProducts)
-
-  findProductById = (productId) => this.state.products.find(p => p._id === productId)
+  componentDidMount () {
+    this.methods.getAllProducts()
+    this.methods.getUser()
+  }
 
   render () {
     const domainData = {
-      isLoaded: this.state.isLoaded,
-      products: this.state.products,
-      addProduct: this.addProduct,
-      deleteProduct: this.deleteProduct,
-      updateProduct: this.updateProduct,
-      findProductById: this.findProductById
+      ...this.state,
+      ...this.methods
     }
 
     return this.state.isLoaded ? <Layout domainData={domainData} /> : null

@@ -1,10 +1,16 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import injectSheet from 'react-jss'
 import {NavLink} from 'react-router-dom'
 
 const propTypes = {
   to: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired
+  children: PropTypes.string.isRequired,
+  exact: PropTypes.bool.isRequired
+}
+
+const defaultProps = {
+  exact: false
 }
 
 const styles = {
@@ -12,17 +18,33 @@ const styles = {
     textDecoration: 'none',
     fontSize: 20,
     color: 'white',
-    paddingRight: '20px'
+    paddingRight: '20px',
+    '&:hover': {
+      color: 'yellow'
+    }
   },
   activeLink: {
     color: 'orange'
   }
 }
 
+const enhancer = injectSheet(styles)
+
 const NavItem = (props) =>
   <NavLink
-    to={props.to} style={styles.navLink} activeStyle={styles.activeLink}>{props.children}</NavLink>
+    to={props.to}
+    exact={props.exact}
+    className={props.classes.navLink}
+    activeClassName={props.classes.activeLink}
+  >
+    {props.children}
+  </NavLink>
 
-NavItem.propTypes = propTypes
+NavItem.propTypes = {
+  ...propTypes,
+  classes: PropTypes.object.isRequired
+}
 
-export default NavItem
+NavItem.defaultProps = defaultProps
+
+export default enhancer(NavItem)
