@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt-nodejs')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/User')
 
@@ -6,6 +7,12 @@ const localStrategyConfig = {
   passwordField: 'password',
   failureFlash: true
 }
+
+const isPasswordValid = (clearPassword, hashedPassword) =>
+  bcrypt.compareSync(clearPassword, hashedPassword)
+
+const generateHash = (clearPassword) =>
+  bcrypt.hashSync(clearPassword, bcrypt.genSaltSync(8), null)
 
 module.exports = (passport) => {
   passport.serializeUser(
@@ -35,11 +42,7 @@ module.exports = (passport) => {
 
       if (user) {
         console.log('duplicate user')
-        const err = Error('A user with that email already exists')
-
-        return done(null, false, {
-          message: `A user with that email already exists: ${email}`
-        })
+        return done(Error.createExpressError(`A user with that email already exists: ${email}`, 422))
       }
 
       console.log('did not find existing user')
@@ -48,11 +51,11 @@ module.exports = (passport) => {
       const newUser = new User({
         local: {
           email,
-          password: User.generateHash(password),
+          password: generateHash(password),
           firstName: body.firstName,
           lastName: body.lastName,
           role: body.role,
-          stripeId: User.generateHash(body.stripeId)
+          stripeId: generateHash(body.stripeId)
         }
       })
 
@@ -70,15 +73,11 @@ module.exports = (passport) => {
       }
 
       if (!user) {
-        return done(null, false, {
-          message: `Unknown email: ${email}`
-        })
+        return done(Error.createExpressError(`Unknown email: ${email}`, 401))
       }
 
-      if (!user.validPassword(password)) {
-        return done(null, false, {
-          message: 'Incorrect password'
-        })
+      if (!isPasswordValid(password, user.local.password)) {
+        return done(Error.createExpressError('Incorrect password', 401))
       }
 
       return done(null, user)

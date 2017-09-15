@@ -1,4 +1,4 @@
-require('../../models/User')
+require('../models/User')
 
 module.exports = (app, passport) => {
   app.post('/api/signup', (req, res, next) => {
@@ -9,9 +9,7 @@ module.exports = (app, passport) => {
 
       if (!user) {
         console.log(info)
-        return res.status(422).json({
-          message: info.message
-        })
+        return next(Error.createExpressError(`Failed to create new user: ${info.message}`, 401))
       }
 
       req.logIn(user, (err) => {
@@ -34,12 +32,12 @@ module.exports = (app, passport) => {
       }
 
       if (!user) {
-        return res.status(401).json({
-          message: info.message
-        })
+        return next(Error.createExpressError(`Unknown authentication error: ${info.message}`, 401))
       }
 
       req.logIn(user, (err) => {
+        console.log('session', req.session)
+        console.log('user', req.user)
         if (err) {
           return next(err)
         }
@@ -52,12 +50,13 @@ module.exports = (app, passport) => {
     })(req, res, next)
   })
 
-  app.get('/api/get_user', (req, res) =>
+  app.get('/api/get_user', (req, res) => {
+    console.log('hitting get_user', req.headers)
     res.status(200).json({
       message: req.user ? 'User session exists' : 'User session does not exist',
       data: req.user
     })
-  )
+  })
 
   app.get('/api/logout', (req, res) => {
     req.logout()

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt-nodejs')
 
 const UserSchema = new mongoose.Schema({
   local: {
@@ -23,14 +22,6 @@ UserSchema.methods.setMetaDates = function () {
   const newDate = new Date()
   this.created = this.created || newDate
   this.modified = newDate
-}
-
-UserSchema.methods.validPassword = function (password) {
-  return bcrypt.compareSync(password, this.local.password)
-}
-
-UserSchema.statics.generateHash = function (password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 }
 
 module.exports = mongoose.model('User', UserSchema)

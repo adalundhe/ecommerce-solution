@@ -26,7 +26,7 @@ class LoginContainer extends Component {
 
     onSubmit: event => {
       event.preventDefault()
-      this.props.domainData.loginUser(...this.state)
+      this.props.domainData.loginUser(this.state.email, this.state.password)
         .then(() => this.props.history.push('/'))
     }
   }

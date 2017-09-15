@@ -3,7 +3,7 @@ module.exports = (err, req, res, next) => {
     return next(err)
   }
 
-  console.log('in error handler', err)
+  console.log('in error handler', err.message)
 
   res
     .status(err.statusCode || 500)
@@ -11,4 +11,10 @@ module.exports = (err, req, res, next) => {
       message: err.message || 'Unknown Error',
       data: err
     })
+}
+
+Error.createExpressError = (message, statusCode) => {
+  const err = Error(message)
+  err.statusCode = statusCode
+  return err
 }

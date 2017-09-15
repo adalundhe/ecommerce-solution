@@ -9,7 +9,7 @@ const ajaxRequest = (uri, method, body) => {
     body: JSON.stringify(body)
   }
 
-  return fetch(`/api/${uri}`, options)
+  return fetch(`http://localhost:3001/api/${uri}`, options)
     .then(handleErrors)
     .then(response => response.json())
     .then(json => json.data)
