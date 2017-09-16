@@ -6,10 +6,11 @@ const ajaxRequest = (uri, method, body) => {
   const options = {
     headers: headers,
     method: method,
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
+    credentials: 'include'
   }
 
-  return fetch(`http://localhost:3001/api/${uri}`, options)
+  return fetch(`/api/${uri}`, options)
     .then(handleErrors)
     .then(response => response.json())
     .then(json => json.data)
@@ -17,9 +18,13 @@ const ajaxRequest = (uri, method, body) => {
 
 const handleErrors = response => {
   if (!response.ok) {
-    const err = Error(response.statusText)
-    err.statusCode = response.status
-    throw err
+    return response.json()
+      .then(({message, data}) => {
+        const err = Error(message)
+        Object.assign(err, data)
+        err.status = response.status
+        throw err
+      })
   }
   return response
 }
@@ -37,3 +42,5 @@ export const signupUser = (user) => ajaxRequest('signup', 'POST', user)
 export const loginUser = (email, password) => ajaxRequest('login', 'POST', {email, password})
 
 export const getUser = () => ajaxRequest('get_user', 'GET')
+
+export const logoutUser = () => ajaxRequest('logout', 'GET')

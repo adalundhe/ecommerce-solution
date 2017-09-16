@@ -1,4 +1,4 @@
-require('../models/User')
+const Errors = require('./errors')
 
 module.exports = (app, passport) => {
   app.post('/api/signup', (req, res, next) => {
@@ -8,8 +8,15 @@ module.exports = (app, passport) => {
       }
 
       if (!user) {
-        console.log(info)
-        return next(Error.createExpressError(`Failed to create new user: ${info.message}`, 401))
+        if (!req.body.email) {
+          return next(Errors.missingEmail(info))
+        }
+
+        if (!req.body.password) {
+          return next(Errors.missingPassword(info))
+        }
+
+        return next(Errors.missingCredentials(info))
       }
 
       req.logIn(user, (err) => {
@@ -32,12 +39,18 @@ module.exports = (app, passport) => {
       }
 
       if (!user) {
-        return next(Error.createExpressError(`Unknown authentication error: ${info.message}`, 401))
+        if (!req.body.email) {
+          return next(Errors.missingEmail(info))
+        }
+
+        if (!req.body.password) {
+          return next(Errors.missingPassword(info))
+        }
+
+        return next(Errors.missingCredentials(info))
       }
 
       req.logIn(user, (err) => {
-        console.log('session', req.session)
-        console.log('user', req.user)
         if (err) {
           return next(err)
         }
@@ -51,7 +64,6 @@ module.exports = (app, passport) => {
   })
 
   app.get('/api/get_user', (req, res) => {
-    console.log('hitting get_user', req.headers)
     res.status(200).json({
       message: req.user ? 'User session exists' : 'User session does not exist',
       data: req.user

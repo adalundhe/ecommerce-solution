@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt-nodejs')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/User')
+const Errors = require('./errors')
 
 const localStrategyConfig = {
   usernameField: 'email',
@@ -16,36 +17,23 @@ const generateHash = (clearPassword) =>
 
 module.exports = (passport) => {
   passport.serializeUser(
-    (user, done) => {
-      console.log('in serializeUser', user)
-      done(null, user._id)
-    }
+    (user, done) => done(null, user._id)
   )
 
-  passport.deserializeUser(
-    (id, done) => {
-      console.log('in deserializeUser', id)
-      User.findById(id, (err, user) => done(err, user))
-    }
-  )
+  passport.deserializeUser(User.findById.bind(User))
 
   passport.use('local-signup', new LocalStrategy({
     ...localStrategyConfig,
     passReqToCallback: true
   }, (req, email, password, done) => {
-    console.log('here!!!')
     User.findOne({'local.email': email}, (err, user) => {
-      console.log('inside find one')
       if (err) {
         return done(err)
       }
 
       if (user) {
-        console.log('duplicate user')
-        return done(Error.createExpressError(`A user with that email already exists: ${email}`, 422))
+        return done(Errors.duplicateEmail({email}))
       }
-
-      console.log('did not find existing user')
 
       const {body} = req
       const newUser = new User({
@@ -54,8 +42,7 @@ module.exports = (passport) => {
           password: generateHash(password),
           firstName: body.firstName,
           lastName: body.lastName,
-          role: body.role,
-          stripeId: generateHash(body.stripeId)
+          role: body.role
         }
       })
 
@@ -67,17 +54,16 @@ module.exports = (passport) => {
 
   passport.use('local-login', new LocalStrategy(localStrategyConfig, (email, password, done) => {
     User.findOne({'local.email': email}, (err, user) => {
-      console.log('inside login user.findone')
       if (err) {
         return done(err)
       }
 
       if (!user) {
-        return done(Error.createExpressError(`Unknown email: ${email}`, 401))
+        return done(Errors.unknownEmail({email}))
       }
 
       if (!isPasswordValid(password, user.local.password)) {
-        return done(Error.createExpressError('Incorrect password', 401))
+        return done(Errors.incorrectPassword())
       }
 
       return done(null, user)

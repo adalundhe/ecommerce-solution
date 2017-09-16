@@ -49,10 +49,13 @@ class DomainDataProvider extends Component {
     getUser: () =>
       ServerApi.getUser()
         .then(user => {
-          console.log('user on load', user)
           this.setState({user})
           return user
-        })
+        }),
+
+    logoutUser: () =>
+      ServerApi.logoutUser()
+        .then(() => this.setState({user: null}))
   }
 
   componentDidMount () {
@@ -63,7 +66,9 @@ class DomainDataProvider extends Component {
   render () {
     const domainData = {
       ...this.state,
-      ...this.methods
+      ...this.methods,
+      loggedIn: this.state.user != null,
+      loggedOut: this.state.user == null
     }
 
     return this.state.isLoaded ? <Layout domainData={domainData} /> : null

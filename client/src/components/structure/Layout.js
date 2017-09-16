@@ -10,7 +10,7 @@ const propTypes = {
 
 const Layout = (props) => (
   <div id='layout'>
-    <Header />
+    <Header domainData={props.domainData} />
     <Main domainData={props.domainData} />
     <Footer />
   </div>

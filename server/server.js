@@ -12,12 +12,14 @@ const orderRoutes = require('./routes/orders')
 
 const app = express()
 const port = 3001
+app.set('trust proxy', '127.0.0.1')
 
 mongoose.connect('mongodb://localhost/e-commerce')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
+  name: 'ecommerce',
   secret: '42',
   secure: false
 }))
@@ -32,7 +34,7 @@ app.use('/api/users', userRoutes)
 app.use('/api/reviews', reviewRoutes)
 app.use('/api/orders', orderRoutes)
 
-app.use(require('./config/errors'))
+app.use(require('./config/error-handler'))
 
 const server = app.listen(port, () => console.log(`Running on port: ${port}`))
 

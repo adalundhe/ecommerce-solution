@@ -30,7 +30,7 @@ class SignUpContainer extends Component {
       event.preventDefault()
       this.props.domainData.signupUser(this.state)
         .then(() => this.props.history.push('/'))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err, Object.keys(err)))
     }
   }
 
