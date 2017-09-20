@@ -40,11 +40,11 @@ module.exports = (app, passport) => {
 
       if (!user) {
         if (!req.body.email) {
-          return next(Errors.missingEmail(info))
+          return next(Errors.unknownEmail({email: '', ...info}))
         }
 
         if (!req.body.password) {
-          return next(Errors.missingPassword(info))
+          return next(Errors.incorrectPassword(info))
         }
 
         return next(Errors.missingCredentials(info))

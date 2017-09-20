@@ -4,6 +4,9 @@ const passport = require('passport')
 const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
+require('mongoose-currency').loadType(mongoose)
+console.log('mongoose types', mongoose.Types)
+
 
 const productRoutes = require('./routes/products')
 const userRoutes = require('./routes/users')

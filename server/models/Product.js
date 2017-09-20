@@ -1,13 +1,15 @@
 const mongoose = require('mongoose')
 
+const {Currency, ObjectId} = mongoose.Schema.Types
+
 const ProductSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  price: { type: Number, required: true },
+  price: { type: Currency, required: true },
   category: {type: String, required: true},
   image: { type: String, required: true },
   created: { type: Date, required: true },
   modified: { type: Date, required: true },
-  reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
+  reviews: [{type: ObjectId, ref: 'Review'}]
 })
 
 ProductSchema.methods.loadData = function (data) {

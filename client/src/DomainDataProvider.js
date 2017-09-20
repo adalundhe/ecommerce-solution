@@ -12,6 +12,10 @@ class DomainDataProvider extends Component {
   methods = {
     getAllProducts: () =>
       ServerApi.getAllProducts()
+        .then(products => products.map(p => ({
+          ...p,
+          price: (p.price / 100).toFixed(2)
+        })))
         .then(products =>
           this.setState({
             isLoaded: true,

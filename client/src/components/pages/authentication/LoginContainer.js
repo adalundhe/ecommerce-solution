@@ -31,7 +31,7 @@ class LoginContainer extends Component {
           this.props.history.push('/')
           alert('Login successful!')
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err.errorCode))
     }
   }
 

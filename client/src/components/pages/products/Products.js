@@ -15,20 +15,15 @@ const Products = (props) =>
 
     <Route
       path='/products' exact
-      render={(routeProps) => <ProductList domainData={props.domainData} history={routeProps.history} />}
+      render={(routeProps) => <ProductList domainData={props.domainData} />}
     />
     <Route
       path='/products/add'
-      render={(routeProps) => <AddProductContainer domainData={props.domainData} history={routeProps.history} />}
+      render={(routeProps) => <AddProductContainer domainData={props.domainData} />}
     />
     <Route
       path='/products/edit/:productId'
-      render={(routeProps) =>
-        <EditProductContainer
-          domainData={props.domainData}
-          history={routeProps.history}
-          match={routeProps.match}
-        />
+      render={(routeProps) => <EditProductContainer domainData={props.domainData} />
       }
     />
   </div>

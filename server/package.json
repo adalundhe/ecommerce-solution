@@ -11,7 +11,8 @@
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.4",
-    "mongoose": "^4.11.8"
+    "mongoose": "^4.11.8",
+    "mongoose-currency": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^4.1.1",

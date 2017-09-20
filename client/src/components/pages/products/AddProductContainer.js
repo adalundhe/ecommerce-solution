@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
+import {withRouter} from 'react-router-dom'
 import * as AppPropTypes from '../../../lib/propTypes'
 import AddProductForm from './AddProductForm'
 
@@ -56,4 +57,4 @@ class AddProductContainer extends Component {
   }
 }
 
-export default AddProductContainer
+export default withRouter(AddProductContainer)
