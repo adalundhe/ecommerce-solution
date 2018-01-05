@@ -25,8 +25,6 @@ const styles = {
 
 const Main = (props) =>
   <main style={styles.main}>
-    <h1>Main</h1>
-
     <Route path='/' exact component={Home} />
     <Route path='/about' component={About} />
     <Route path='/products' render={() => <Products domainData={props.domainData} />} />

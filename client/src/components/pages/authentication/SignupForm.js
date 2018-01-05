@@ -6,43 +6,57 @@ import injectSheet from 'react-jss'
 
 const styles = {
   container: {
-    height: '100vh',
-    width: '100vw'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   formContainer: {
-    height: '50vh',
-    width: '50vh',
-    border: 'solid 3px red'
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flexStart',
+    alignItems: 'center',
+    height: '100vh',
+    width: '40vw'
   }
 }
 
 const enhancer = injectSheet(styles)
 
 
-const SignupForm = ({onFirstNameChanged, onLastNameChanged, onEmailChanged, onPasswordChanged, onSubmit}) => (
-  <div>
-    <h3>New User Sign Up</h3>
-    <form>
-      <label>First Name</label>
-      <input type='text' placeholder='first name'
-        onChange={onFirstNameChanged} />
+const SignupForm = ({onFirstNameChanged, onLastNameChanged, onEmailChanged, onPasswordChanged, onSubmit, classes}) => (
+  <div className={classes.container}>
+    <form className={classes.formContainer}>
+      <h3>New User Sign Up</h3>
+      <div>
+        <label>First Name</label>
+        <input type='text' placeholder='first name'
+          onChange={onFirstNameChanged} />
+      </div>
 
-      <label>Last Name</label>
-      <input type='text' placeholder='last name'
-        onChange={onLastNameChanged} />
+      <div>
+        <label>Last Name</label>
+        <input type='text' placeholder='last name'
+          onChange={onLastNameChanged} />
+      </div>
 
-      <label>Email</label>
-      <input type='email' placeholder='email address'
-        onChange={onEmailChanged} />
+      <div>
+        <label>Email</label>
+        <input type='email' placeholder='email address'
+          onChange={onEmailChanged} />
+      </div>
 
-      <label>Password</label>
-      <input type='password' placeholder='password'
-        onChange={onPasswordChanged} />
+      <div>
+        <label>Password</label>
+        <input type='password' placeholder='password'
+          onChange={onPasswordChanged} />
+      </div>
 
-      <button type='button' className='btn btn-success'
+      <div>
+        <button type='button' className='btn btn-success'
         onClick={onSubmit}>Sign Up</button>
 
-      <Link to={'/login'}>Login</Link>
+        <Link to={'/login'}>Login</Link>
+      </div>
     </form>
   </div>
 )
