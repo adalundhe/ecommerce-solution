@@ -27,11 +27,11 @@ class SignUpContainer extends Component {
   }
   render () {
     return (
-        <SignupForm
-          handleOnChange={this.handleOnChange}
-          onSubmit={this.onSubmit}
-          {...this.state}
-        />
+      <SignupForm
+        handleOnChange={this.handleOnChange}
+        onSubmit={this.onSubmit}
+        {...this.state}
+      />
     )
   }
 }

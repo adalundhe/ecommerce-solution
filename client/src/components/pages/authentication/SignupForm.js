@@ -6,8 +6,7 @@ import Typography from 'material-ui/Typography'
 // https://material-ui-next.com/style/typography/
 import Button from 'material-ui/Button'
 // https://material-ui-next.com/demos/buttons/
-import Card from 'material-ui/Card';
-
+import Card from 'material-ui/Card'
 
 const styles = {
   container: {
@@ -32,32 +31,31 @@ const styles = {
 
 const enhancer = injectSheet(styles)
 
-
 const SignupForm = ({handleOnChange, onSubmit, classes}) => (
   <div className={classes.container}>
     <Card>
       <form className={classes.formContainer}>
-        <Typography type="display1" gutterBottom>
+        <Typography type='display1' gutterBottom>
           User Registration
         </Typography>
         <div className={classes.fieldContainer}>
-          <Typography type="subheading" gutterBottom>
+          <Typography type='subheading' gutterBottom>
             First Name
           </Typography>
           <input type='text' placeholder='John'
-            onChange={handleOnChange} id='firstName'/>
+            onChange={handleOnChange} id='firstName' />
         </div>
 
         <div className={classes.fieldContainer}>
-          <Typography type="subheading" gutterBottom>
+          <Typography type='subheading' gutterBottom>
             Last Name
           </Typography>
           <input type='text' placeholder='Doe'
-            onChange={handleOnChange} id='lastName'/>
+            onChange={handleOnChange} id='lastName' />
         </div>
 
         <div className={classes.fieldContainer}>
-          <Typography type="subheading" gutterBottom>
+          <Typography type='subheading' gutterBottom>
             Email
           </Typography>
           <input type='email' placeholder='john@gmail.com'
@@ -65,11 +63,11 @@ const SignupForm = ({handleOnChange, onSubmit, classes}) => (
         </div>
 
         <div className={classes.fieldContainer}>
-          <Typography type="subheading" gutterBottom>
+          <Typography type='subheading' gutterBottom>
             Password
           </Typography>
           <input type='password'
-            onChange={handleOnChange} id='password'/>
+            onChange={handleOnChange} id='password' />
         </div>
 
         <div className={classes.fieldContainer}>
@@ -80,8 +78,6 @@ const SignupForm = ({handleOnChange, onSubmit, classes}) => (
     </Card>
   </div>
 )
-
-
 
 SignupForm.propTypes = {
   handleOnChange: PropTypes.func.isRequired,

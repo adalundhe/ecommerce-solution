@@ -6,15 +6,14 @@ import Typography from 'material-ui/Typography'
 // https://material-ui-next.com/style/typography/
 import Button from 'material-ui/Button'
 // https://material-ui-next.com/demos/buttons/
-import Card from 'material-ui/Card';
-
+import Card from 'material-ui/Card'
 
 const styles = {
   container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 20
   },
   formContainer: {
     display: 'flex',
@@ -36,17 +35,17 @@ const LoginForm = ({handleOnChange, onSubmit, classes}) =>
   <div className={classes.container}>
     <Card>
       <form className={classes.formContainer}>
-        <Typography type="display1" gutterBottom>
+        <Typography type='display1' gutterBottom>
           User Login
         </Typography>
         <div className={classes.fieldContainer}>
-          <Typography type="subheading" gutterBottom>
+          <Typography type='subheading' gutterBottom>
             Email
           </Typography>
           <input type='email' onChange={handleOnChange} id='email' />
         </div>
         <div className={classes.fieldContainer}>
-          <Typography type="subheading" gutterBottom>
+          <Typography type='subheading' gutterBottom>
             Password
           </Typography>
           <input type='password' onChange={handleOnChange} id='password' />
