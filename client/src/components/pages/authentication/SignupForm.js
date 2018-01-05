@@ -23,32 +23,32 @@ const styles = {
 const enhancer = injectSheet(styles)
 
 
-const SignupForm = ({onFirstNameChanged, onLastNameChanged, onEmailChanged, onPasswordChanged, onSubmit, classes}) => (
+const SignupForm = ({handleOnChange, onSubmit, classes}) => (
   <div className={classes.container}>
     <form className={classes.formContainer}>
       <h3>New User Sign Up</h3>
       <div>
         <label>First Name</label>
         <input type='text' placeholder='first name'
-          onChange={onFirstNameChanged} />
+          onChange={handleOnChange} id='firstName'/>
       </div>
 
       <div>
         <label>Last Name</label>
         <input type='text' placeholder='last name'
-          onChange={onLastNameChanged} />
+          onChange={handleOnChange} id='lastName'/>
       </div>
 
       <div>
         <label>Email</label>
         <input type='email' placeholder='email address'
-          onChange={onEmailChanged} />
+          onChange={handleOnChange} id='email' />
       </div>
 
       <div>
         <label>Password</label>
         <input type='password' placeholder='password'
-          onChange={onPasswordChanged} />
+          onChange={handleOnChange} id='password'/>
       </div>
 
       <div>
@@ -64,10 +64,7 @@ const SignupForm = ({onFirstNameChanged, onLastNameChanged, onEmailChanged, onPa
 
 
 SignupForm.propTypes = {
-  onFirstNameChanged: PropTypes.func.isRequired,
-  onLastNameChanged: PropTypes.func.isRequired,
-  onEmailChanged: PropTypes.func.isRequired,
-  onPasswordChanged: PropTypes.func.isRequired,
+  handleOnChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }
 
