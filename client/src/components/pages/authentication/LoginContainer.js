@@ -15,31 +15,24 @@ class LoginContainer extends Component {
     password: null
   }
 
-  callbacks = {
-    onEmailChanged: event => this.setState({
-      email: event.target.value
-    }),
+  handleOnChange = (event) => this.setState({ [event.target.id]: event.target.value })
 
-    onPasswordChanged: event => this.setState({
-      password: event.target.value
-    }),
-
-    onSubmit: event => {
-      event.preventDefault()
-      this.props.domainData.loginUser(this.state.email, this.state.password)
-        .then(() => {
-          this.props.history.push('/')
-          alert('Login successful!')
-        })
-        .catch(err => console.log(err.errorCode))
-    }
+  onSubmit = (event) => {
+    event.preventDefault()
+    this.props.domainData.loginUser(this.state.email, this.state.password)
+      .then(() => {
+        this.props.history.push('/')
+        alert('Login successful!')
+      })
+      .catch(err => console.log(err.errorCode))
   }
 
   render () {
     return (
       <LoginForm
         {...this.state}
-        {...this.callbacks}
+        handleOnChange={this.handleOnChange}
+        onSubmit={this.onSubmit}
       />
     )
   }
