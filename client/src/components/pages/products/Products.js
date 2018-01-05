@@ -4,30 +4,28 @@ import * as AppPropTypes from '../../../lib/propTypes'
 import ProductList from './ProductList'
 import AddProductContainer from './AddProductContainer'
 import EditProductContainer from './EditProductContainer'
+import PropTypes from 'prop-types'
 
-const propTypes = {
-  domainData: AppPropTypes.domainData
-}
-
-const Products = (props) =>
+const Products = ({classes, domainData}) =>
   <div>
-    <h1>Products</h1>
-
     <Route
       path='/products' exact
-      render={(routeProps) => <ProductList domainData={props.domainData} />}
+      render={() => <ProductList domainData={domainData} />}
     />
     <Route
       path='/products/add'
-      render={(routeProps) => <AddProductContainer domainData={props.domainData} />}
+      render={() => <AddProductContainer domainData={domainData} />}
     />
     <Route
       path='/products/edit/:productId'
-      render={(routeProps) => <EditProductContainer domainData={props.domainData} />
+      render={() => <EditProductContainer domainData={domainData} />
       }
     />
   </div>
 
-Products.propTypes = propTypes
+Products.propTypes = {
+  domainData: AppPropTypes.domainData,
+  classes: PropTypes.object
+}
 
 export default Products
