@@ -33,15 +33,12 @@ class SignUpContainer extends Component {
         .catch(err => console.log(err, Object.keys(err)))
     }
   }
-
   render () {
     return (
-      <div>
         <SignupForm
           {...this.state}
           {...this.callbacks}
         />
-      </div>
     )
   }
 }

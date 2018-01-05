@@ -1,14 +1,23 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import {Link} from 'react-router-dom'
+import injectSheet from 'react-jss'
 
-const propTypes = {
-  onFirstNameChanged: PropTypes.func.isRequired,
-  onLastNameChanged: PropTypes.func.isRequired,
-  onEmailChanged: PropTypes.func.isRequired,
-  onPasswordChanged: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+
+const styles = {
+  container: {
+    height: '100vh',
+    width: '100vw'
+  },
+  formContainer: {
+    height: '50vh',
+    width: '50vh',
+    border: 'solid 3px red'
+  }
 }
+
+const enhancer = injectSheet(styles)
+
 
 const SignupForm = ({onFirstNameChanged, onLastNameChanged, onEmailChanged, onPasswordChanged, onSubmit}) => (
   <div>
@@ -38,6 +47,14 @@ const SignupForm = ({onFirstNameChanged, onLastNameChanged, onEmailChanged, onPa
   </div>
 )
 
-SignupForm.propTypes = propTypes
 
-export default SignupForm
+
+SignupForm.propTypes = {
+  onFirstNameChanged: PropTypes.func.isRequired,
+  onLastNameChanged: PropTypes.func.isRequired,
+  onEmailChanged: PropTypes.func.isRequired,
+  onPasswordChanged: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired
+}
+
+export default enhancer(SignupForm)
