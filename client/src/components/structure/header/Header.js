@@ -8,7 +8,7 @@ import HeaderLink from './HeaderLink'
 const styles = {
   header: {
     alignItems: 'center',
-    backgroundColor: 'purple',
+    backgroundColor: '#3498db',
     display: 'flex',
     height: 50,
     justifyContent: 'center',

@@ -3,16 +3,13 @@ import React from 'react'
 const styles = {
   footer: {
     height: 25,
-
     position: 'fixed',
     bottom: 0,
     left: 0,
-
     right: 0,
     display: 'flex',
     alignItems: 'center',
-
-    backgroundColor: 'blue',
+    backgroundColor: '#2980b9',
     paddingLeft: 20,
     paddingRight: 20
   },

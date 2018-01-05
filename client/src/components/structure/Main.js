@@ -18,7 +18,7 @@ const styles = {
     bottom: 25,
     left: 0,
     right: 0,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#ecf0f1',
     overflow: 'scroll'
   }
 }

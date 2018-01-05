@@ -15,16 +15,19 @@ const defaultProps = {
 
 const styles = {
   navLink: {
+    display: 'flex',
+    justifyContent: 'center',
+    minWidth: 100,
     textDecoration: 'none',
     fontSize: 20,
     color: 'white',
-    paddingRight: '20px',
     '&:hover': {
       color: 'yellow'
     }
   },
   activeLink: {
-    color: 'orange'
+    color: '#2c3e50',
+    borderBottom: 'solid 3px #2c3e50'
   }
 }
 
