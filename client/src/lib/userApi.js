@@ -1,3 +1,4 @@
+// YOU CAN JUST GIVE THEM THIS BOILERPLATE CODE, BUT TRY AND EXPLAIN IT
 const ajaxRequest = (uri, method, body) => {
   const headers = new Headers({
     'Content-Type': 'application/json'
@@ -28,14 +29,6 @@ const handleErrors = response => {
   }
   return response
 }
-
-export const getAllProducts = () => ajaxRequest('products', 'GET')
-
-export const addProduct = (newProduct) => ajaxRequest('products', 'POST', newProduct)
-
-export const deleteProduct = (productId) => ajaxRequest(`products/${productId}`, 'DELETE')
-
-export const updateProduct = (product) => ajaxRequest(`products/${product.id}`, 'PUT', product)
 
 export const signupUser = (user) => ajaxRequest('signup', 'POST', user)
 

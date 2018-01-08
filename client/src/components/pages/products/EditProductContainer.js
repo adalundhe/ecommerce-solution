@@ -43,7 +43,7 @@ class EditProductContainer extends Component {
       id: this.state.id
     }
     this.props.domainData.updateProduct(updatedProduct)
-      .then(() => this.props.history.push('/products'))
+    this.props.history.push('/products')
   }
 
   render () {

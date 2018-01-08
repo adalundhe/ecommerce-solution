@@ -37,7 +37,7 @@ const Header = (props) =>
       {props.domainData.loggedOut ? <NavItem to='/signup'>Register</NavItem> : null}
       {props.domainData.loggedOut ? <NavItem to='/login'>Login</NavItem> : null}
       {props.domainData.loggedIn ? <HeaderLink onClick={props.domainData.logoutUser}>Logout</HeaderLink> : null}
-      {props.domainData.loggedIn ? <HeaderLink onClick={() => {}}>{props.domainData.user.local.email}</HeaderLink> : null}
+      {props.domainData.loggedIn ? <HeaderLink>{props.domainData.user.local.email}</HeaderLink> : null}
     </nav>
   </header>
 

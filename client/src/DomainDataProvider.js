@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Layout from './components/structure/Layout'
-import * as ServerApi from './lib/serverApi'
+import $ from 'jquery'
+import * as UserApi from './lib/userApi'
 
 class DomainDataProvider extends Component {
   state = {
@@ -10,55 +11,82 @@ class DomainDataProvider extends Component {
   }
 
   methods = {
-    getAllProducts: () =>
-      ServerApi.getAllProducts()
-        .then(products => products.map(p => ({
-          ...p,
-          price: (p.price).toFixed(2)
-        })))
-        .then(products =>
-          this.setState({
-            isLoaded: true,
-            products: products
-          })),
+    getAllProducts: () => {
+      $.ajax({
+        url: '/api/products',
+        method: 'GET'
+      }).done(response => {
+        this.setState({
+          isLoaded: true,
+          products: response.data
+        })
+      })
+    },
 
-    addProduct: (newProduct) =>
-      ServerApi.addProduct(newProduct)
-        .then(this.methods.getAllProducts),
+    addProduct: (newProduct) => {
+      $.ajax({
+        url: '/api/products',
+        method: 'POST',
+        data: newProduct
+      }).done(response => {
+        console.log(response)
+        this.methods.getAllProducts()
+      })
+    },
 
-    deleteProduct: (productId) =>
-      ServerApi.deleteProduct(productId)
-        .then(this.methods.getAllProducts),
+    deleteProduct: (productId) => {
+      $.ajax({
+        url: `/api/products/${productId}`,
+        method: 'DELETE'
+      }).done(response => {
+        console.log(response)
+        this.methods.getAllProducts()
+      })
+    },
 
-    updateProduct: (product) =>
-      ServerApi.updateProduct(product)
-        .then(this.methods.getAllProducts),
+    updateProduct: (product) => {
+      $.ajax({
+        url: `/api/products/${product.id}`,
+        method: 'PUT',
+        data: product
+      }).done(response => {
+        console.log(response)
+        this.methods.getAllProducts()
+      })
+    },
 
-    findProductById: (productId) => this.state.products.find(p => p._id === productId),
+    findProductById: (productId) => {
+      $.ajax({
+        url: `/api/products/${productId}`,
+        method: 'GET'
+      }).done(response => {
+        return response.data
+      })
+    },
 
     signupUser: (user) =>
-      ServerApi.signupUser(user)
+      UserApi.signupUser(user)
         .then(user => {
           this.setState({user})
           return user
         }),
 
     loginUser: (email, password) =>
-      ServerApi.loginUser(email, password)
+      UserApi.loginUser(email, password)
         .then(user => {
           this.setState({user})
           return user
         }),
 
     getUser: () =>
-      ServerApi.getUser()
+      UserApi.getUser()
         .then(user => {
           this.setState({user})
           return user
         }),
 
     logoutUser: () =>
-      ServerApi.logoutUser()
+      UserApi.logoutUser()
         .then(() => this.setState({user: null}))
   }
 

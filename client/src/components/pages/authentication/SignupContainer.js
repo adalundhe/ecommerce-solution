@@ -22,8 +22,7 @@ class SignUpContainer extends Component {
   onSubmit = (event) => {
     event.preventDefault()
     this.props.domainData.signupUser(this.state)
-      .then(() => this.props.history.push('/'))
-      .catch(err => console.log(err, Object.keys(err)))
+    this.props.history.push('/')
   }
   render () {
     return (
