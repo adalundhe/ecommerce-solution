@@ -7,10 +7,6 @@ import Products from '../pages/products/Products'
 import Signup from '../pages/authentication/SignupContainer'
 import Login from '../pages/authentication/LoginContainer'
 
-const propTypes = {
-  domainData: AppPropTypes.domainData
-}
-
 const styles = {
   main: {
     position: 'fixed',
@@ -23,15 +19,17 @@ const styles = {
   }
 }
 
-const Main = (props) =>
+const Main = ({domainData}) =>
   <main style={styles.main}>
     <Route path='/' exact component={Home} />
     <Route path='/about' component={About} />
-    <Route path='/products' render={() => <Products domainData={props.domainData} />} />
-    <Route path='/login' render={() => <Login domainData={props.domainData} />} />
-    <Route path='/signup' render={() => <Signup domainData={props.domainData} />} />
+    <Route path='/products' render={() => <Products domainData={domainData} />} />
+    <Route path='/login' render={() => <Login domainData={domainData} />} />
+    <Route path='/signup' render={() => <Signup domainData={domainData} />} />
   </main>
 
-Main.propTypes = propTypes
+Main.propTypes = {
+  domainData: AppPropTypes.domainData
+}
 
 export default Main

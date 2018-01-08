@@ -33,7 +33,7 @@ const Home = ({classes}) =>
         Zamazon
         </Typography>
         <Typography type='display1' gutterBottom className={classes.subheader}>
-        Amazon - with a ⚡️
+        Amazon - with a <span role='img' aria-label='emoji'>  ⚡ </span>️
         </Typography>
       </div>
     </Card>

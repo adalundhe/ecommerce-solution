@@ -5,7 +5,7 @@ export const product = PropTypes.shape({
   category: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired
+  price: PropTypes.number.isRequired
 })
 
 export const domainData = PropTypes.shape({
@@ -14,7 +14,6 @@ export const domainData = PropTypes.shape({
   addProduct: PropTypes.func.isRequired,
   deleteProduct: PropTypes.func.isRequired,
   updateProduct: PropTypes.func.isRequired,
-  findProductById: PropTypes.func.isRequired,
   user: PropTypes.object,
   getUser: PropTypes.func.isRequired,
   loginUser: PropTypes.func.isRequired,

@@ -19,14 +19,14 @@ const enhancer = injectSheet(styles)
 
 const ProductCard = ({product, onEdit, onDelete, classes}) =>
   <Card className={classes.card}>
-    <h1>{product.name}</h1>
-    <h2>{product.category}</h2>
-    <h3>{product.price}</h3>
+    <Typography type='display2'>{product.name}</Typography>
+    <Typography type='display1'>{product.category}</Typography>
+    <Typography type='subheading'>{product.price}</Typography>
     {
-      product.image ? <img src={product.image} /> : <h5>Image Unavailable</h5>
+      product.image ? <img src={product.image} alt='product img' /> : <h5>Image Unavailable</h5>
     }
-    <button onClick={onEdit}>Edit</button>
-    <button onClick={onDelete}>Delete</button>
+    <Button raised onClick={onEdit}>Edit</Button>
+    <Button raised onClick={onDelete}>Delete</Button>
   </Card>
 
 ProductCard.propTypes = {

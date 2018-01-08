@@ -60,7 +60,8 @@ const LoginForm = ({handleOnChange, onSubmit, classes}) =>
 
 LoginForm.propTypes = {
   handleOnChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  classes: PropTypes.object
 }
 
 export default enhancer(LoginForm)

@@ -3,16 +3,6 @@ import React from 'react'
 import injectSheet from 'react-jss'
 import {NavLink} from 'react-router-dom'
 
-const propTypes = {
-  to: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
-  exact: PropTypes.bool.isRequired
-}
-
-const defaultProps = {
-  exact: false
-}
-
 const styles = {
   navLink: {
     display: 'flex',
@@ -33,21 +23,25 @@ const styles = {
 
 const enhancer = injectSheet(styles)
 
-const NavItem = (props) =>
+const NavItem = ({to, exact, classes, children}) =>
   <NavLink
-    to={props.to}
-    exact={props.exact}
-    className={props.classes.navLink}
-    activeClassName={props.classes.activeLink}
+    to={to}
+    exact={exact}
+    className={classes.navLink}
+    activeClassName={classes.activeLink}
   >
-    {props.children}
+    {children}
   </NavLink>
 
 NavItem.propTypes = {
-  ...propTypes,
+  to: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
+  exact: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired
 }
 
-NavItem.defaultProps = defaultProps
+NavItem.defaultProps = {
+  exact: false
+}
 
 export default enhancer(NavItem)

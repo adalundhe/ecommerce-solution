@@ -28,16 +28,16 @@ const styles = {
 
 const enhancer = injectSheet(styles)
 
-const Header = (props) =>
-  <header className={props.classes.header}>
-    <nav className={props.classes.nav}>
+const Header = ({classes, domainData}) =>
+  <header className={classes.header}>
+    <nav className={classes.nav}>
       <NavItem exact to='/'>Home</NavItem>
       <NavItem to='/about'>About</NavItem>
       <NavItem to='/products'>Products</NavItem>
-      {props.domainData.loggedOut ? <NavItem to='/signup'>Register</NavItem> : null}
-      {props.domainData.loggedOut ? <NavItem to='/login'>Login</NavItem> : null}
-      {props.domainData.loggedIn ? <HeaderLink onClick={props.domainData.logoutUser}>Logout</HeaderLink> : null}
-      {props.domainData.loggedIn ? <HeaderLink>{props.domainData.user.local.email}</HeaderLink> : null}
+      {domainData.loggedOut ? <NavItem to='/signup'>Register</NavItem> : null}
+      {domainData.loggedOut ? <NavItem to='/login'>Login</NavItem> : null}
+      {domainData.loggedIn ? <HeaderLink onClick={domainData.logoutUser}>Logout</HeaderLink> : null}
+      {domainData.loggedIn ? <HeaderLink>{domainData.user.local.email}</HeaderLink> : null}
     </nav>
   </header>
 

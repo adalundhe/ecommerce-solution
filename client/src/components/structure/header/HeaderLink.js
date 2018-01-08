@@ -2,11 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import injectSheet from 'react-jss'
 
-const propTypes = {
-  children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired
-}
-
 const styles = {
   a: {
     textDecoration: 'none',
@@ -21,16 +16,17 @@ const styles = {
 
 const enhancer = injectSheet(styles)
 
-const HeaderLink = (props) =>
+const HeaderLink = ({classes, onClick, children}) =>
   <a
-    className={props.classes.a}
-    onClick={props.onClick}
+    className={classes.a}
+    onClick={onClick}
   >
-    {props.children}
+    {children}
   </a>
 
 HeaderLink.propTypes = {
-  ...propTypes,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
   classes: PropTypes.object.isRequired
 }
 

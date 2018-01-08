@@ -4,18 +4,16 @@ import Header from './header/Header'
 import Footer from './Footer'
 import Main from './Main'
 
-const propTypes = {
-  domainData: AppPropTypes.domainData
-}
-
-const Layout = (props) => (
+const Layout = ({domainData}) => (
   <div id='layout'>
-    <Header domainData={props.domainData} />
-    <Main domainData={props.domainData} />
+    <Header domainData={domainData} />
+    <Main domainData={domainData} />
     <Footer />
   </div>
 )
 
-Layout.propTypes = propTypes
+Layout.propTypes = {
+  domainData: AppPropTypes.domainData
+}
 
 export default Layout

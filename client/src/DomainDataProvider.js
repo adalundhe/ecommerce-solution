@@ -7,7 +7,8 @@ class DomainDataProvider extends Component {
   state = {
     isLoaded: false,
     products: [],
-    user: null
+    user: null,
+    product: null
   }
 
   methods = {
@@ -52,15 +53,6 @@ class DomainDataProvider extends Component {
       }).done(response => {
         console.log(response)
         this.methods.getAllProducts()
-      })
-    },
-
-    findProductById: (productId) => {
-      $.ajax({
-        url: `/api/products/${productId}`,
-        method: 'GET'
-      }).done(response => {
-        return response.data
       })
     },
 

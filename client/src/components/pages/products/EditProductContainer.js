@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import * as AppPropTypes from '../../../lib/propTypes'
 import EditProductForm from './EditProductForm'
+import $ from 'jquery'
 
 class EditProductContainer extends Component {
   static propTypes = {
@@ -20,14 +21,18 @@ class EditProductContainer extends Component {
   }
 
   componentDidMount () {
-    const product = this.props.domainData.findProductById(this.props.match.params.productId)
-    this.setState({
-      name: product.name,
-      image: product.image,
-      category: product.category,
-      price: product.price,
-      id: product._id,
-      loaded: true
+    $.ajax({
+      url: `/api/products/${this.props.match.params.productId}`,
+      method: 'GET'
+    }).done(response => {
+      this.setState({
+        name: response.data.name,
+        image: response.data.image,
+        category: response.data.category,
+        price: response.data.price,
+        id: response.data._id,
+        loaded: true
+      })
     })
   }
 

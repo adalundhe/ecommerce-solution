@@ -7,11 +7,6 @@ import Typography from 'material-ui/Typography'
 import injectSheet from 'react-jss'
 import {compose} from 'recompose'
 
-const propTypes = {
-  domainData: AppPropTypes.domainData,
-  history: PropTypes.object.isRequired
-}
-
 const styles = {
   productListContainer: {
     display: 'flex',
@@ -49,6 +44,10 @@ const ProductList = ({domainData, history, classes}) =>
 
   </div>
 
-ProductList.propTypes = propTypes
+ProductList.propTypes = {
+  domainData: AppPropTypes.domainData,
+  classes: PropTypes.object,
+  history: PropTypes.object.isRequired
+}
 
 export default enhancer(ProductList)

@@ -81,7 +81,8 @@ const SignupForm = ({handleOnChange, onSubmit, classes}) => (
 
 SignupForm.propTypes = {
   handleOnChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 export default enhancer(SignupForm)
