@@ -25,7 +25,7 @@ class AddProductContainer extends Component {
       name: this.state.name,
       category: this.state.category,
       image: this.state.image,
-      price: parseFloat(this.state.price)
+      price: Number(this.state.price)
     }
     this.props.domainData.addProduct(product)
     this.props.history.push('/products')
