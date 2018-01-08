@@ -11,47 +11,30 @@ class AddProductContainer extends Component {
   }
 
   state = {
-    name: '',
-    category: '',
-    image: '',
-    price: '0'
+    name: undefined,
+    category: undefined,
+    image: undefined,
+    price: undefined
   }
 
-  onNameChanged = (event) => this.setState({
-    name: event.target.value
-  })
-
-  onCategoryChanged = (event) => this.setState({
-    category: event.target.value
-  })
-
-  onImageChanged = (event) => this.setState({
-    image: event.target.value
-  })
-
-  onPriceChanged = (event) => {
-    const price = event.target.value || '0'
-    this.setState({
-      price: parseFloat(price)
-    })
-  }
+  handleOnChange = (event) => this.setState({ [event.target.id]: event.target.value })
 
   onSubmit = (event) => {
     event.preventDefault()
-    this.props.domainData.addProduct(this.state)
+    const product = {
+      name: this.state.name,
+      category: this.state.category,
+      image: this.state.image,
+      price: parseFloat(this.state.price)
+    }
+    this.props.domainData.addProduct(product)
     this.props.history.push('/products')
   }
 
   render () {
     return <AddProductForm
-      name={this.state.name}
-      onNameChanged={this.onNameChanged}
-      category={this.state.category}
-      onCategoryChanged={this.onCategoryChanged}
-      image={this.state.image}
-      onImageChanged={this.onImageChanged}
-      price={this.state.price}
-      onPriceChanged={this.onPriceChanged}
+      {...this.state}
+      handleOnChange={this.handleOnChange}
       onSubmit={this.onSubmit}
     />
   }
