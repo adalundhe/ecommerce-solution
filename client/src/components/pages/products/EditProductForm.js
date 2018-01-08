@@ -1,27 +1,83 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import injectSheet from 'react-jss'
+import {Link} from 'react-router-dom'
+import Typography from 'material-ui/Typography'
+// https://material-ui-next.com/style/typography/
+import Button from 'material-ui/Button'
+// https://material-ui-next.com/demos/buttons/
+import Card from 'material-ui/Card'
 
-const propTypes = {
-  name: PropTypes.string.isRequired,
-  onNameChanged: PropTypes.func.isRequired,
-  category: PropTypes.string.isRequired,
-  onCategoryChanged: PropTypes.func.isRequired,
-  image: PropTypes.string.isRequired,
-  onImageChanged: PropTypes.func.isRequired,
-  price: PropTypes.string.isRequired,
-  onPriceChanged: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+const styles = {
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
+  },
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 20
+  },
+  fieldContainer: {
+    width: '100%',
+    marginBottom: 10,
+    display: 'flex',
+    justifyContent: 'space-between'
+  }
 }
 
-const EditProductForm = (props) =>
-  <form onSubmit={props.onSubmit}>
-    <p>Name: <input type='text' value={props.name} onChange={props.onNameChanged} /></p>
-    <p>Category: <input type='text' value={props.category} onChange={props.onCategoryChanged} /></p>
-    <p>Image: <input type='text' value={props.image} onChange={props.onImageChanged} /></p>
-    <p>Price: <input type='text' value={props.price} onChange={props.onPriceChanged} /></p>
-    <p><input type='submit' value='Submit' /></p>
-  </form>
+const enhancer = injectSheet(styles)
 
-EditProductForm.propTypes = propTypes
+const EditProductForm = ({classes, onSubmit, handleOnChange, name, category, image, price}) =>
+  <div className={classes.container}>
+    <Card>
+      <form className={classes.formContainer}>
+        <Typography type='display1' gutterBottom>
+          Update Product
+        </Typography>
+        <div className={classes.fieldContainer}>
+          <Typography type='subheading' gutterBottom>
+          Product Name
+          </Typography>
+          <input type='text' onChange={handleOnChange} value={name} id='name' />
+        </div>
+        <div className={classes.fieldContainer}>
+          <Typography type='subheading' gutterBottom>
+            Category
+          </Typography>
+          <input type='text' onChange={handleOnChange} value={category} id='category' />
+        </div>
+        <div className={classes.fieldContainer}>
+          <Typography type='subheading' gutterBottom>
+            Image
+          </Typography>
+          <input type='text' onChange={handleOnChange} value={image} id='image' />
+        </div>
+        <div className={classes.fieldContainer}>
+          <Typography type='subheading' gutterBottom>
+            Price
+          </Typography>
+          <input type='number' onChange={handleOnChange} value={price} id='price' />
+        </div>
+        <div className={classes.fieldContainer}>
+          <Button onClick={onSubmit} raised> Update Product </Button>
+          <Link to='/products'>Cancel</Link>
+        </div>
+      </form>
+    </Card>
+  </div>
 
-export default EditProductForm
+EditProductForm.propTypes = {
+  name: PropTypes.string.isRequired,
+  classes: PropTypes.object,
+  category: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  handleOnChange: PropTypes.func.isRequired
+}
+
+export default enhancer(EditProductForm)

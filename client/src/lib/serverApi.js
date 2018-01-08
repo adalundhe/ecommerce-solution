@@ -35,7 +35,7 @@ export const addProduct = (newProduct) => ajaxRequest('products', 'POST', newPro
 
 export const deleteProduct = (productId) => ajaxRequest(`products/${productId}`, 'DELETE')
 
-export const updateProduct = (product) => ajaxRequest(`products/${product._id}`, 'PUT', product)
+export const updateProduct = (product) => ajaxRequest(`products/${product.id}`, 'PUT', product)
 
 export const signupUser = (user) => ajaxRequest('signup', 'POST', user)
 

@@ -8,40 +8,50 @@ class EditProductContainer extends Component {
   static propTypes = {
     domainData: AppPropTypes.domainData,
     history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired
   }
 
-  constructor ({domainData, location, match}) {
-    super()
-    const {product} = location.state || domainData.findProductById(match.params.productId)
-
-    this.state = { // copy product into state
-      ...product
-    }
+  state = {
+    name: undefined,
+    image: undefined,
+    category: undefined,
+    price: undefined,
+    loaded: false
   }
 
-  callbacks = {
-    onNameChanged: (event) => this.setState({name: event.target.value}),
+  componentDidMount () {
+    const product = this.props.domainData.findProductById(this.props.match.params.productId)
+    this.setState({
+      name: product.name,
+      image: product.image,
+      category: product.category,
+      price: product.price,
+      id: product._id,
+      loaded: true
+    })
+  }
 
-    onCategoryChanged: (event) => this.setState({category: event.target.value}),
+  handleOnChange = (event) => this.setState({ [event.target.id]: event.target.value })
 
-    onImageChanged: (event) => this.setState({image: event.target.value}),
-
-    onPriceChanged: (event) => this.setState({price: event.target.value}),
-
-    onSubmit: (event) => {
-      event.preventDefault()
-      this.props.domainData.updateProduct(this.state)
-        .then(() => this.props.history.push('/products'))
+  onSubmit = (event) => {
+    event.preventDefault()
+    const updatedProduct = {
+      name: this.state.name,
+      image: this.state.image,
+      category: this.state.category,
+      price: this.state.price,
+      id: this.state.id
     }
+    this.props.domainData.updateProduct(updatedProduct)
+      .then(() => this.props.history.push('/products'))
   }
 
   render () {
-    return <EditProductForm
+    return this.state.loaded ? <EditProductForm
       {...this.state}
-      {...this.callbacks}
-    />
+      handleOnChange={this.handleOnChange}
+      onSubmit={this.onSubmit}
+    /> : <h3>Unable To Find Product</h3>
   }
 }
 
