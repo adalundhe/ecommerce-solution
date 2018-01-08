@@ -18,10 +18,12 @@ class LoginContainer extends Component {
   handleOnChange = (event) => this.setState({ [event.target.id]: event.target.value })
 
   onSubmit = (event) => {
-    event.preventDefault()
     this.props.domainData.loginUser(this.state.email, this.state.password)
-    this.props.history.push('/')
-    alert('Login successful!')
+      .then(() => {
+        this.props.history.push('/')
+        alert('Login successful!')
+      })
+      .catch(err => alert(err.errorCode))
   }
 
   render () {
