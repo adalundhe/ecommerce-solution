@@ -54,7 +54,7 @@ module.exports = (app, passport) => {
         if (err) {
           return next(err)
         }
-
+        
         return res.status(200).json({
           message: 'Login successful',
           data: user

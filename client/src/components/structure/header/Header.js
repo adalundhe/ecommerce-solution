@@ -36,7 +36,9 @@ const Header = ({classes, domainData}) =>
       <NavItem to='/products'>Products</NavItem>
       {domainData.loggedOut ? <NavItem to='/signup'>Register</NavItem> : null}
       {domainData.loggedOut ? <NavItem to='/login'>Login</NavItem> : null}
-      {domainData.loggedIn ? <HeaderLink onClick={domainData.logoutUser}>Logout</HeaderLink> : null}
+      {domainData.loggedIn ? <NavItem to='/cart'>Cart</NavItem> : null}
+      {domainData.loggedIn ? <NavItem to='/orders'>Orders</NavItem> : null}
+      {domainData.loggedIn ? <HeaderLink onClick={() => domainData.logoutUser()}>Logout</HeaderLink> : null}
       {domainData.loggedIn ? <HeaderLink>{domainData.user.local.email}</HeaderLink> : null}
     </nav>
   </header>

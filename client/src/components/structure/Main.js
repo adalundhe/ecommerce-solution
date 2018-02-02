@@ -6,6 +6,8 @@ import About from '../pages/About'
 import Products from '../pages/products/Products'
 import Signup from '../pages/authentication/SignupContainer'
 import Login from '../pages/authentication/LoginContainer'
+import {CartList} from '../pages/cart'
+import {OrderList} from '../pages/orders'
 
 const styles = {
   main: {
@@ -26,6 +28,8 @@ const Main = ({domainData}) =>
     <Route path='/products' render={() => <Products domainData={domainData} />} />
     <Route path='/login' render={() => <Login domainData={domainData} />} />
     <Route path='/signup' render={() => <Signup domainData={domainData} />} />
+    {domainData.loggedIn ? <Route path='/cart' render={() => <CartList domainData={domainData} />} /> : null}
+    {domainData.loggedIn ? <Route path='/orders' render={() => <OrderList domainData={domainData} />} /> : null}
   </main>
 
 Main.propTypes = {

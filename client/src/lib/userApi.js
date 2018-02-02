@@ -11,6 +11,8 @@ const ajaxRequest = (uri, method, body) => {
     credentials: 'include'
   }
 
+  console.log(uri,method,body)
+
   return fetch(`/api/${uri}`, options)
     .then(handleErrors)
     .then(response => response.json())

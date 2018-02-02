@@ -19,30 +19,41 @@ const enhancer = compose(
   withRouter
 )
 
-const ProductList = ({domainData, history, classes}) =>
-  <div>
+const ProductList = ({domainData, history, classes}) => {
+  return (
+    <div>
     <Typography type='display2' gutterBottom align='center'>
       Products
     </Typography>
 
-    <Link to='/products/add'>Add a new Product</Link>
+    {domainData.user && domainData.user.isAdmin ? <Link to='/products/add'>Add a new Product</Link> : null}
     <div className={classes.productListContainer}>
       {
         domainData.products.map(product =>
           <ProductCard
             key={product._id}
             product={product}
+            loggedIn={domainData.loggedIn}
+            isAdmin={domainData.user ? domainData.user.isAdmin : false}
             onDelete={() => domainData.deleteProduct(product._id)}
+            submitReview={domainData.submitReview}
+            deleteReview={domainData.deleteReview}
+            editReview={domainData.editReview}
+            getProductReviews={domainData.getProductReviews}
+            user={domainData.user}
             onEdit={() => history.push({
               pathname: `/products/edit/${product._id}`,
               state: {product}
             })}
+            onAdd={() => domainData.addToCart(product)}
           />
         )
       }
     </div>
 
   </div>
+  )
+}
 
 ProductList.propTypes = {
   domainData: AppPropTypes.domainData,
